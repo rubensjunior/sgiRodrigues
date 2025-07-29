@@ -40,7 +40,7 @@
       "usage": "production",
       "ftpServer": "ftp.rubensbentes.com.br",
       "ftpUser": "master@sgi.rubensbentes.com.br",
-      "ftpPassword": "v2:55ffb87eb1f815022669dc21e7ded5012faaac04dc198f23",
+      "ftpPassword": "v2:534d1c7eb884cd6d3114790813fe9d7546b6eef66ec07a3e",
       "databaseConnectionType": "custom",
       "databaseType": "postgres",
       "db_host": "aws-0-sa-east-1.pooler.supabase.com",
