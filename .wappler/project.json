@@ -34,13 +34,23 @@
     },
     {
       "name": "Producao",
-      "remoteURL": "https://sgi.rubensbentes.com.br:3000",
+      "remoteURL": "https://sgi.rubensbentes.com.br",
       "access": "ftp",
       "targetType": "wappler",
       "usage": "production",
+      "webServerLang": "node",
+      "NodeVersion": "lts",
+      "NodeOS": "alpine",
+      "databaseConnectionType": "custom",
+      "databaseType": "postgres",
+      "db_host": "aws-0-sa-east-1.pooler.supabase.com",
+      "db_port": "5432",
+      "db_user": "postgres.eqyafrpnfuwgessstuzc",
+      "db_password": "@Baki025@",
+      "db_database": "postgres",
       "ftpServer": "ftp.rubensbentes.com.br",
       "ftpUser": "master@sgi.rubensbentes.com.br",
-      "ftpPassword": "v2:4a50be272480c17fb1b522a60081d85acdcccbc9e161c907"
+      "ftpPassword": "v2:15dc0a541155583f2949084bfcb27dc35768be3e4b52eaf1"
     }
   ],
   "activeTarget": "Development",
