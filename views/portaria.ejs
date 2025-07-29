@@ -1,4 +1,5 @@
 <!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="portaria" appConnect="local" components="{dmxBootstrap5Alert:{}}" -->
+<dmx-serverconnect id="buscar_colaborador" noload="true" url="/api/portaria/identificar-usuario" dmx-param:id_usuario="qr_user_id.value"></dmx-serverconnect>
 <div class="container">
     <div class="row">
         <div class="col">
@@ -37,11 +38,17 @@ function confirmarColaborador() {
             <p id="reader-result" style="margin-top: 1rem; font-weight: bold;"></p>
 
             <div class="d-flex flex-row mb-4">
-                <button id="btn1" class="btn btn-primary" onclick="confirmarColaborador()">
+                <button id="btn1" class="btn btn-primary" onclick="confirmarColaborador()" dmx-on:click="run([{wait:{delay:500}},{run:{outputType:'text',action:`buscar_colaborador.load({id_usuario: qr_user_id.value})`}}])">
                     Confirmar colaborador
                 </button>
             </div>
 
+            <div class="alert alert-success">
+                <h5 class="alert-heading">Colaborador Confirmado!</h5>
+                <p class="mb-0">Colaborador: {{buscar_colaborador.data.query_usuario_veiculo[0].nome_colaborador}}</p>
+                <p class="mb-0">CPF: {{buscar_colaborador.data.query_usuario_veiculo[0].cpf_colaborador}}</p>
+                <p class="mb-0">Placa: {{buscar_colaborador.data.query_usuario_veiculo[0].veiculos_colaboradores[0].placa_veiculo}}</p>
+            </div>
             <div class="d-flex flex-row">
                 <button id="btn2" class="btn btn-success me-3" dmx-bind:disabled="!qr_user_id.value">Entrada</button>
                 <button id="btn3" class="btn btn-warning" dmx-bind:disabled="!qr_user_id.value">Saída</button>
@@ -49,10 +56,7 @@ function confirmarColaborador() {
 
             <!-- Exibe o ID confirmado -->
             <div class="mt-4" dmx-show="qr_user_id.value">
-                <div class="alert alert-success">
-                    <h5 class="alert-heading">Colaborador Confirmado!</h5>
-                    <p class="mb-0">ID do Usuário: <strong dmx-text="qr_user_id.value"></strong></p>
-                </div>
+
             </div>
 
         </div>

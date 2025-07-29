@@ -21,23 +21,10 @@
       "storage"
     ],
     "tables": {
-      "realtime.schema_migrations": {
-        "db": {
-          "schema": "realtime"
-        }
-      },
-      "realtime.subscription": {
-        "db": {
-          "schema": "realtime"
-        }
-      },
-      "realtime.messages": {
-        "db": {
-          "schema": "realtime"
-        }
-      },
       "colaboradores": {
-        "db": {},
+        "db": {
+          "schema": "public"
+        },
         "columns": {
           "id_colaborador": {
             "db": {
@@ -87,6 +74,21 @@
         },
         "refs": {
           "veiculos_colaboradores": "colaborador"
+        }
+      },
+      "realtime.schema_migrations": {
+        "db": {
+          "schema": "realtime"
+        }
+      },
+      "realtime.subscription": {
+        "db": {
+          "schema": "realtime"
+        }
+      },
+      "realtime.messages": {
+        "db": {
+          "schema": "realtime"
         }
       },
       "veiculos_colaboradores": {
@@ -143,6 +145,12 @@
               "onDelete": "NO ACTION"
             }
           }
+        }
+      },
+      "vault.secrets": {
+        "db": {
+          "schema": "vault",
+          "comment": "Table with encrypted `secret` column for storing sensitive information on disk."
         }
       },
       "auth.sso_domains": {
@@ -575,12 +583,6 @@
         },
         "refs": {
           "auth.mfa_challenges": "factor_id"
-        }
-      },
-      "vault.secrets": {
-        "db": {
-          "schema": "vault",
-          "comment": "Table with encrypted `secret` column for storing sensitive information on disk."
         }
       },
       "storage.migrations": {
