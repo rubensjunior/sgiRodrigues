@@ -1,4 +1,5 @@
 <!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="portaria" appConnect="local" components="{dmxBootstrap5Alert:{}}" -->
+<dmx-serverconnect id="registro_entrada" noload="true" url="/api/portaria/registrar-entrada" dmx-on:success="notificacoes.success('Registrado com sucesso!')" dmx-on:error="notificacoes.danger(lastError.status+lastError.message+lastError.response)"></dmx-serverconnect>
 <dmx-serverconnect id="buscar_colaborador" noload="true" url="/api/portaria/identificar-usuario" dmx-param:id_usuario="qr_user_id.value"></dmx-serverconnect>
 <div class="container">
     <div class="row">
@@ -50,8 +51,8 @@ function confirmarColaborador() {
                 <p class="mb-0">Placa: {{buscar_colaborador.data.query_usuario_veiculo[0].veiculos_colaboradores[0].placa_veiculo}}</p>
             </div>
             <div class="d-flex flex-row">
-                <button id="btn2" class="btn btn-success me-3" dmx-bind:disabled="!qr_user_id.value">Entrada</button>
-                <button id="btn3" class="btn btn-warning" dmx-bind:disabled="!qr_user_id.value">Saída</button>
+                <button id="btn2" class="btn btn-success me-3" dmx-on:click="registro_entrada.load({id_colaborador: qr_user_id.value, id_agente: usuario_logado.data.identity_user, ide_veiculo: buscar_colaborador.data.query_usuario_veiculo[0].veiculos_colaboradores[0].id_veiculo_colaborador})">Entrada</button>
+                <button id="btn3" class="btn btn-warning">Saída</button>
             </div>
 
             <!-- Exibe o ID confirmado -->

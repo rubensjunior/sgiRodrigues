@@ -3,9 +3,100 @@
     "$_GET": [
       {
         "type": "text",
-        "name": "id_usuario"
+        "name": "id_colaborador"
+      },
+      {
+        "type": "text",
+        "name": "id_agente"
+      },
+      {
+        "type": "text",
+        "name": "ide_veiculo"
       }
     ]
   },
-  "exec": {}
+  "exec": {
+    "steps": {
+      "name": "insert_registro_entrada",
+      "module": "dbupdater",
+      "action": "insert",
+      "options": {
+        "connection": "rodrigues",
+        "sql": {
+          "type": "insert",
+          "values": [
+            {
+              "table": "registro_portaria",
+              "column": "id_colaborador_registro",
+              "type": "text",
+              "value": "{{$_GET.id_colaborador}}"
+            },
+            {
+              "table": "registro_portaria",
+              "column": "tipo_registro",
+              "type": "text",
+              "value": "Entrada"
+            },
+            {
+              "table": "registro_portaria",
+              "column": "data_hora",
+              "type": "datetime",
+              "value": "{{TIMESTAMP}}"
+            },
+            {
+              "table": "registro_portaria",
+              "column": "id_agente_portaria",
+              "type": "text",
+              "value": "{{$_GET.id_agente}}"
+            },
+            {
+              "table": "registro_portaria",
+              "column": "id_veiculo_registrado",
+              "type": "number",
+              "value": "{{$_GET.ide_veiculo}}"
+            }
+          ],
+          "table": "registro_portaria",
+          "returning": "id_registro_portaria",
+          "query": "insert into \"registro_portaria\" (\"data_hora\", \"id_agente_portaria\", \"id_colaborador_registro\", \"id_veiculo_registrado\", \"tipo_registro\") values (?, ?, ?, ?, ?)",
+          "params": [
+            {
+              "name": ":P1",
+              "type": "expression",
+              "value": "{{$_GET.id_colaborador}}",
+              "test": ""
+            },
+            {
+              "name": ":P2",
+              "type": "expression",
+              "value": "{{TIMESTAMP}}",
+              "test": ""
+            },
+            {
+              "name": ":P3",
+              "type": "expression",
+              "value": "{{$_GET.id_agente}}",
+              "test": ""
+            },
+            {
+              "name": ":P4",
+              "type": "expression",
+              "value": "{{$_GET.ide_veiculo}}",
+              "test": ""
+            }
+          ]
+        }
+      },
+      "meta": [
+        {
+          "name": "identity",
+          "type": "text"
+        },
+        {
+          "name": "affected",
+          "type": "number"
+        }
+      ]
+    }
+  }
 }
