@@ -1,30 +1,61 @@
-<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="portaria" appConnect="local" -->
+<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="portaria" appConnect="local" components="{dmxBootstrap5Alert:{}}" -->
 <div class="container">
     <div class="row">
         <div class="col">
-            <h1>Fancy display heading</h1>
+
+            <h1>Registro de entrada</h1>
+
+            <!-- App Connect variável para armazenar o ID do usuário -->
+            <dmx-value id="qr_user_id" dmx-bind:value="''"></dmx-value>
+
             <script src="https://unpkg.com/html5-qrcode"></script>
             <div id="reader"></div>
 
             <script>
                 const qrCode = new Html5Qrcode("reader");
+                let lastQrCode = '';
 
 qrCode.start(
   { facingMode: "environment" },
   { fps: 10, qrbox: 250 },
   function onScanSuccess(decodedText, decodedResult) {
-    // Apenas exibe o QR lido no console ou em um elemento da página (sem redirecionar)
     console.log("QR Code lido:", decodedText);
     document.getElementById("reader-result").innerText = decodedText;
-    // ❗Não pare a câmera, nem redirecione
+    lastQrCode = decodedText;
   }
 );
+
+function confirmarColaborador() {
+    if (window.dmx && window.dmx.app && window.dmx.app.data && window.dmx.app.data.qr_user_id) {
+        window.dmx.app.data.qr_user_id.value = lastQrCode;
+    } else if (window.dmx && window.dmx.app) {
+        window.dmx.app.set('qr_user_id.value', lastQrCode);
+    }
+}
             </script>
 
             <p id="reader-result" style="margin-top: 1rem; font-weight: bold;"></p>
 
+            <div class="d-flex flex-row mb-4">
+                <button id="btn1" class="btn btn-primary" onclick="confirmarColaborador()">
+                    Confirmar colaborador
+                </button>
+            </div>
 
+            <div class="d-flex flex-row">
+                <button id="btn2" class="btn btn-success me-3" dmx-bind:disabled="!qr_user_id.value">Entrada</button>
+                <button id="btn3" class="btn btn-warning" dmx-bind:disabled="!qr_user_id.value">Saída</button>
+            </div>
+
+            <!-- Exibe o ID confirmado -->
+            <div class="mt-4" dmx-show="qr_user_id.value">
+                <div class="alert alert-success">
+                    <h5 class="alert-heading">Colaborador Confirmado!</h5>
+                    <p class="mb-0">ID do Usuário: <strong dmx-text="qr_user_id.value"></strong></p>
+                </div>
+            </div>
 
         </div>
     </div>
-    <meta name="ac:route" content="/portaria">
+</div>
+<meta name="ac:route" content="/portaria">
