@@ -1,0 +1,82 @@
+<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="qrcode" appConnect="local" components="{dmxBootstrap5Alert:{}}" -->
+<dmx-serverconnect id="usuario_atual" url="/api/colaborador/usuario-logado"></dmx-serverconnect>
+
+<!-- Mobile App Container -->
+<div class="mobile-app-container">
+    <!-- Header/Status Bar -->
+    <div class="mobile-header">
+
+        <!-- App Header -->
+        <div class="app-header">
+            <div class="header-content">
+                <i class="fas fa-qrcode header-icon" dmx-on:click="logout_usuario.load({});navegacao.reload()"></i>
+                <h1 class="app-title">QR Code</h1>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="mobile-content">
+        <!-- User Info Card -->
+        <div class="user-card" dmx-show="usuario_atual.data.query_usuario.nome_colaborador">
+            <div class="user-avatar">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="user-info">
+                <h2 class="user-name" dmx-text="usuario_atual.data.query_usuario.nome_colaborador"></h2>
+                <p class="user-subtitle">Colaborador</p>
+            </div>
+        </div>
+
+        <!-- QR Code Section -->
+        <div class="qr-section">
+            <!-- QR Code Display -->
+            <div class="qr-display" dmx-show="usuario_atual.data.query_usuario.base64">
+                <div class="qr-frame">
+                    <img id="qr" dmx-bind:src="'data:image/png;base64,' + usuario_atual.data.query_usuario.base64" alt="QR Code" class="qr-image">
+                </div>
+                <p class="qr-description">Seu código QR pessoal</p>
+            </div>
+
+            <!-- No QR Code State -->
+            <div class="no-qr-state" dmx-show="!usuario_atual.data.query_usuario.base64 && !usuario_atual.state.executing">
+                <div class="empty-state">
+                    <i class="fas fa-qrcode empty-icon"></i>
+                    <h3 class="empty-title">Sem QR Code</h3>
+                    <p class="empty-description">Nenhum código QR disponível para este usuário.</p>
+                </div>
+            </div>
+
+            <!-- Loading State -->
+            <div class="loading-state" dmx-show="usuario_atual.state.executing">
+                <div class="loading-animation">
+                    <div class="loading-spinner"></div>
+                    <p class="loading-text">Carregando...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+    </div>
+
+    <!-- Bottom Safe Area -->
+    <div class="bottom-safe-area"></div>
+</div>
+
+<!-- Script para mostrar hora atual -->
+<script>
+    function updateTime() {
+    const now = new Date();
+    const time = now.toLocaleTimeString('pt-BR', { 
+        hour: '2-digit', 
+        minute: '2-digit',
+        hour12: false 
+    });
+    document.getElementById('current-time').textContent = time;
+}
+
+updateTime();
+setInterval(updateTime, 1000);
+</script>
+
+<meta name="ac:route" content="/qr-code">

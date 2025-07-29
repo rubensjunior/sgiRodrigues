@@ -1,0 +1,14 @@
+{
+  "cadastrar-conta.ejs": {
+    "layoutPage": "main",
+    "description": ""
+  },
+  "qr-code.ejs": {
+    "layoutPage": "main",
+    "description": ""
+  },
+  "portaria.ejs": {
+    "layoutPage": "main",
+    "description": ""
+  }
+}

@@ -1,0 +1,60 @@
+[
+  {
+    "name": "identity_user",
+    "module": "auth",
+    "action": "identify",
+    "options": {
+      "provider": "security"
+    },
+    "output": true,
+    "meta": []
+  },
+  {
+    "name": "query_usuario",
+    "module": "dbconnector",
+    "action": "single",
+    "options": {
+      "connection": "rodrigues",
+      "sql": {
+        "type": "SELECT",
+        "columns": [
+          {
+            "table": "colaboradores",
+            "column": "nome_colaborador"
+          },
+          {
+            "table": "colaboradores",
+            "column": "cpf_colaborador"
+          },
+          {
+            "table": "colaboradores",
+            "column": "base64"
+          }
+        ],
+        "params": [],
+        "table": {
+          "name": "colaboradores"
+        },
+        "primary": "id_colaborador",
+        "joins": [],
+        "query": "select \"nome_colaborador\", \"cpf_colaborador\", \"base64\" from \"colaboradores\""
+      }
+    },
+    "output": true,
+    "meta": [
+      {
+        "type": "text",
+        "name": "nome_colaborador"
+      },
+      {
+        "type": "text",
+        "name": "cpf_colaborador"
+      },
+      {
+        "type": "text",
+        "name": "base64"
+      }
+    ],
+    "outputType": "object"
+  }
+]

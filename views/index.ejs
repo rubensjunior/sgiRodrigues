@@ -1,0 +1,29 @@
+<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="index" appConnect="local" -->
+<div class="wappler-block container-fluid vh-100">
+    <div class="row h-100 align-items-center justify-content-center">
+        <!-- Responsive columns: col-11 for mobile, col-8 for small tablets, col-6 for medium, col-5 for large, col-4 for extra large -->
+        <div class="col-11 col-sm-8 col-md-6 col-lg-5 col-xl-4 text-center">
+            <img class="img-fluid mb-3" width="160" src="/assets/images/LOGO COLORIDO.png">
+            <div class="card p-4">
+                <div class="card-body text-start">
+                    <form id="form_login" is="dmx-serverconnect-form" method="post" action="/api/seguranca/login" dmx-on:error="notificacoes.danger('Erro')" dmx-on:success="navegacao.goto('/qr-code')" dmx-on:unauthorized="notificacoes.warning('Usuario não cadastrado.')">
+                        <div class="form-group mb-3"> <label for="cpf_login" class="form-label">Insira seu CPF</label>
+                            <input class="form-control" id="cpf_login" name="cpf_login" aria-describedby="input1_help">
+                        </div>
+                        <div class="form-group"> <button id="btn1" class="btn btn-primary py-2" type="submit">Acessar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js"></script>
+
+<script>
+    $('#cpf_login').mask('000.000.000-00');
+</script>
+<meta name="ac:route" content="/">

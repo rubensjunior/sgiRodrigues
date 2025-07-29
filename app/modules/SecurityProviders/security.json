@@ -1,0 +1,23 @@
+{
+  "name": "security",
+  "module": "auth",
+  "action": "provider",
+  "options": {
+    "secret": "8h6TABt5LercPKJ",
+    "provider": "Database",
+    "connection": "rodrigues",
+    "users": {
+      "table": "colaboradores",
+      "identity": "id_colaborador",
+      "username": "cpf_colaborador",
+      "password": "cpf_colaborador"
+    },
+    "permissions": {}
+  },
+  "meta": [
+    {
+      "name": "identity",
+      "type": "text"
+    }
+  ]
+}

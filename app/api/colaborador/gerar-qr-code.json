@@ -1,0 +1,27 @@
+[
+  {
+    "name": "identity",
+    "module": "auth",
+    "action": "identify",
+    "options": {
+      "provider": "security"
+    },
+    "meta": [],
+    "output": true,
+    "collapsed": true
+  },
+  {
+    "name": "api",
+    "module": "api",
+    "action": "send",
+    "options": {
+      "url": "https://backend.spacefeed.app/api-test/qrcode",
+      "data": {
+        "usuario": "{{identity}}"
+      },
+      "dataType": "json"
+    },
+    "output": true,
+    "collapsed": true
+  }
+]

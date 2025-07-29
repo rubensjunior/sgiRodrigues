@@ -1,0 +1,20 @@
+{
+  "name": "rodrigues",
+  "module": "dbconnector",
+  "action": "connect",
+  "options": {
+    "client": "postgres",
+    "connection": {
+      "host": "aws-0-sa-east-1.pooler.supabase.com",
+      "port": 5432,
+      "user": "postgres.eqyafrpnfuwgessstuzc",
+      "password": "@Baki025@",
+      "database": "postgres"
+    },
+    "tz": "utc",
+    "meta": {}
+  },
+  "fileName": "rodrigues.json",
+  "actionFilePath": "file:///C:/Users/Rubens%20Bentes/Documents/Projetos/sgiRodrigues/app/modules/connections/rodrigues.json",
+  "serverType": "node"
+}

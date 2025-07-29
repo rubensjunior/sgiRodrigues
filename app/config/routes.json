@@ -1,0 +1,26 @@
+{
+  "routes": [
+    {
+      "path": "/",
+      "page": "index",
+      "routeType": "page",
+      "layout": "main"
+    },
+    {
+      "path": "/cadastrar-conta",
+      "page": "cadastrar-conta",
+      "layout": "main"
+    },
+    {
+      "path": "/qr-code",
+      "page": "qr-code",
+      "layout": "main",
+      "exec": "/api/seguranca/pagina-restrita"
+    },
+    {
+      "path": "/portaria",
+      "page": "portaria",
+      "layout": "main"
+    }
+  ]
+}

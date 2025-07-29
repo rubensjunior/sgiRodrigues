@@ -1,0 +1,639 @@
+{
+  "type": "postgres",
+  "connection": {
+    "host": "aws-0-sa-east-1.pooler.supabase.com",
+    "port": 5432,
+    "user": "postgres.eqyafrpnfuwgessstuzc",
+    "password": "@Baki025@",
+    "database": "postgres"
+  },
+  "direct": true,
+  "schema": {
+    "schemas": [
+      "realtime",
+      "pgbouncer",
+      "public",
+      "extensions",
+      "vault",
+      "graphql_public",
+      "graphql",
+      "auth",
+      "storage"
+    ],
+    "tables": {
+      "realtime.schema_migrations": {
+        "db": {
+          "schema": "realtime"
+        }
+      },
+      "realtime.subscription": {
+        "db": {
+          "schema": "realtime"
+        }
+      },
+      "realtime.messages": {
+        "db": {
+          "schema": "realtime"
+        }
+      },
+      "colaboradores": {
+        "db": {},
+        "columns": {
+          "id_colaborador": {
+            "db": {
+              "type": "uuid",
+              "default": "gen_random_uuid()",
+              "primary": true,
+              "unique": true,
+              "nullable": false
+            }
+          },
+          "created_at_colaborador": {
+            "db": {
+              "type": "timestamp",
+              "default": "now()",
+              "useTz": true,
+              "primary": false,
+              "unique": false,
+              "nullable": false
+            }
+          },
+          "nome_colaborador": {
+            "db": {
+              "type": "string",
+              "maxLength": -5,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "cpf_colaborador": {
+            "db": {
+              "type": "string",
+              "maxLength": -5,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "base64": {
+            "db": {
+              "type": "text",
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          }
+        },
+        "refs": {
+          "veiculos_colaboradores": "colaborador"
+        }
+      },
+      "veiculos_colaboradores": {
+        "db": {
+          "schema": "public"
+        },
+        "columns": {
+          "id_veiculo_colaborador": {
+            "db": {
+              "type": "bigIncrements",
+              "primary": true,
+              "unique": true,
+              "nullable": false
+            }
+          },
+          "created_at": {
+            "db": {
+              "type": "timestamp",
+              "default": "now()",
+              "useTz": true,
+              "primary": false,
+              "unique": false,
+              "nullable": false
+            }
+          },
+          "tipo_veiculo": {
+            "db": {
+              "type": "string",
+              "maxLength": -5,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "placa_veiculo": {
+            "db": {
+              "type": "string",
+              "maxLength": -5,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "colaborador": {
+            "db": {
+              "type": "reference",
+              "primary": false,
+              "unique": false,
+              "nullable": true,
+              "references": "id_colaborador",
+              "inTable": "colaboradores",
+              "referenceType": "uuid",
+              "onUpdate": "NO ACTION",
+              "onDelete": "NO ACTION"
+            }
+          }
+        }
+      },
+      "auth.sso_domains": {
+        "db": {
+          "schema": "auth",
+          "comment": "Auth: Manages SSO email address domain mapping to an SSO Identity Provider."
+        }
+      },
+      "auth.saml_providers": {
+        "db": {
+          "schema": "auth",
+          "comment": "Auth: Manages SAML Identity Provider connections."
+        }
+      },
+      "auth.sso_providers": {
+        "db": {
+          "schema": "auth",
+          "comment": "Auth: Manages SSO identity provider information; see saml_providers for SAML."
+        },
+        "refs": {
+          "auth.sso_domains": "sso_provider_id",
+          "auth.saml_providers": "sso_provider_id",
+          "auth.saml_relay_states": "sso_provider_id"
+        }
+      },
+      "auth.instances": {
+        "db": {
+          "schema": "auth",
+          "comment": "Auth: Manages users across multiple sites."
+        }
+      },
+      "auth.schema_migrations": {
+        "db": {
+          "schema": "auth",
+          "comment": "Auth: Manages updates to the auth system."
+        }
+      },
+      "auth.audit_log_entries": {
+        "db": {
+          "schema": "auth",
+          "comment": "Auth: Audit trail for user actions."
+        }
+      },
+      "auth.sessions": {
+        "db": {
+          "schema": "auth",
+          "comment": "Auth: Stores session data associated to a user."
+        },
+        "refs": {
+          "auth.refresh_tokens": "session_id",
+          "auth.mfa_amr_claims": "session_id"
+        }
+      },
+      "auth.refresh_tokens": {
+        "db": {
+          "schema": "auth",
+          "comment": "Auth: Store of tokens used to refresh JWT tokens once they expire."
+        }
+      },
+      "auth.saml_relay_states": {
+        "db": {
+          "schema": "auth",
+          "comment": "Auth: Contains SAML Relay State information for each Service Provider initiated login."
+        }
+      },
+      "auth.users": {
+        "db": {
+          "schema": "auth",
+          "comment": "Auth: Stores user login data within a secure schema."
+        },
+        "columns": {
+          "instance_id": {
+            "db": {
+              "type": "uuid",
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "id": {
+            "db": {
+              "type": "uuid",
+              "primary": true,
+              "unique": true,
+              "nullable": false
+            }
+          },
+          "aud": {
+            "db": {
+              "type": "string",
+              "maxLength": 255,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "role": {
+            "db": {
+              "type": "string",
+              "maxLength": 255,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "email": {
+            "db": {
+              "type": "string",
+              "maxLength": 255,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "encrypted_password": {
+            "db": {
+              "type": "string",
+              "maxLength": 255,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "email_confirmed_at": {
+            "db": {
+              "type": "timestamp",
+              "useTz": true,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "invited_at": {
+            "db": {
+              "type": "timestamp",
+              "useTz": true,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "confirmation_token": {
+            "db": {
+              "type": "string",
+              "maxLength": 255,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "confirmation_sent_at": {
+            "db": {
+              "type": "timestamp",
+              "useTz": true,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "recovery_token": {
+            "db": {
+              "type": "string",
+              "maxLength": 255,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "recovery_sent_at": {
+            "db": {
+              "type": "timestamp",
+              "useTz": true,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "email_change_token_new": {
+            "db": {
+              "type": "string",
+              "maxLength": 255,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "email_change": {
+            "db": {
+              "type": "string",
+              "maxLength": 255,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "email_change_sent_at": {
+            "db": {
+              "type": "timestamp",
+              "useTz": true,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "last_sign_in_at": {
+            "db": {
+              "type": "timestamp",
+              "useTz": true,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "raw_app_meta_data": {
+            "db": {
+              "type": "jsonb",
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "raw_user_meta_data": {
+            "db": {
+              "type": "jsonb",
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "is_super_admin": {
+            "db": {
+              "type": "boolean",
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "created_at": {
+            "db": {
+              "type": "timestamp",
+              "useTz": true,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "updated_at": {
+            "db": {
+              "type": "timestamp",
+              "useTz": true,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "phone": {
+            "db": {
+              "type": "text",
+              "default": "",
+              "primary": false,
+              "unique": true,
+              "nullable": true
+            }
+          },
+          "phone_confirmed_at": {
+            "db": {
+              "type": "timestamp",
+              "useTz": true,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "phone_change": {
+            "db": {
+              "type": "text",
+              "default": "",
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "phone_change_token": {
+            "db": {
+              "type": "string",
+              "default": "",
+              "maxLength": 255,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "phone_change_sent_at": {
+            "db": {
+              "type": "timestamp",
+              "useTz": true,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "confirmed_at": {
+            "db": {
+              "type": "timestamp",
+              "useTz": true,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "email_change_token_current": {
+            "db": {
+              "type": "string",
+              "default": "",
+              "maxLength": 255,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "email_change_confirm_status": {
+            "db": {
+              "type": "integer",
+              "default": 0,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "banned_until": {
+            "db": {
+              "type": "timestamp",
+              "useTz": true,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "reauthentication_token": {
+            "db": {
+              "type": "string",
+              "default": "",
+              "maxLength": 255,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "reauthentication_sent_at": {
+            "db": {
+              "type": "timestamp",
+              "useTz": true,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "is_sso_user": {
+            "db": {
+              "type": "boolean",
+              "default": "false",
+              "primary": false,
+              "unique": false,
+              "comment": "Auth: Set this column to true when the account comes from SSO. These accounts can have duplicate emails.",
+              "nullable": false
+            }
+          },
+          "deleted_at": {
+            "db": {
+              "type": "timestamp",
+              "useTz": true,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "is_anonymous": {
+            "db": {
+              "type": "boolean",
+              "default": "false",
+              "primary": false,
+              "unique": false,
+              "nullable": false
+            }
+          }
+        },
+        "refs": {
+          "auth.sessions": "user_id",
+          "auth.identities": "user_id",
+          "auth.one_time_tokens": "user_id",
+          "auth.mfa_factors": "user_id"
+        }
+      },
+      "auth.flow_state": {
+        "db": {
+          "schema": "auth",
+          "comment": "stores metadata for pkce logins"
+        },
+        "refs": {
+          "auth.saml_relay_states": "flow_state_id"
+        }
+      },
+      "auth.identities": {
+        "db": {
+          "schema": "auth",
+          "comment": "Auth: Stores identities associated to a user."
+        }
+      },
+      "auth.one_time_tokens": {
+        "db": {
+          "schema": "auth"
+        }
+      },
+      "auth.mfa_challenges": {
+        "db": {
+          "schema": "auth",
+          "comment": "auth: stores metadata about challenge requests made"
+        }
+      },
+      "auth.mfa_amr_claims": {
+        "db": {
+          "schema": "auth",
+          "comment": "auth: stores authenticator method reference claims for multi factor authentication"
+        }
+      },
+      "auth.mfa_factors": {
+        "db": {
+          "schema": "auth",
+          "comment": "auth: stores metadata about factors"
+        },
+        "refs": {
+          "auth.mfa_challenges": "factor_id"
+        }
+      },
+      "vault.secrets": {
+        "db": {
+          "schema": "vault",
+          "comment": "Table with encrypted `secret` column for storing sensitive information on disk."
+        }
+      },
+      "storage.migrations": {
+        "db": {
+          "schema": "storage"
+        }
+      },
+      "storage.buckets": {
+        "db": {
+          "schema": "storage"
+        },
+        "refs": {
+          "storage.objects": "bucket_id",
+          "storage.s3_multipart_uploads": "bucket_id",
+          "storage.s3_multipart_uploads_parts": "bucket_id"
+        }
+      },
+      "storage.objects": {
+        "db": {
+          "schema": "storage"
+        }
+      },
+      "storage.s3_multipart_uploads": {
+        "db": {
+          "schema": "storage"
+        },
+        "sub": {
+          "storage.s3_multipart_uploads_parts": "upload_id"
+        }
+      },
+      "storage.s3_multipart_uploads_parts": {
+        "db": {
+          "schema": "storage"
+        },
+        "parent": "s3_multipart_uploads"
+      }
+    },
+    "views": {
+      "extensions.pg_stat_statements_info": {
+        "db": {
+          "schema": "extensions"
+        }
+      },
+      "extensions.pg_stat_statements": {
+        "db": {
+          "schema": "extensions"
+        }
+      },
+      "vault.decrypted_secrets": {
+        "db": {
+          "schema": "vault"
+        }
+      }
+    }
+  }
+}
