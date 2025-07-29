@@ -30,19 +30,24 @@
       "name": "Development",
       "remoteURL": "http://localhost:3000/",
       "access": "local",
-      "targetType": "wappler",
-      "databaseConnectionType": "sqlite",
-      "sqliteDbFile": "/db/db_dev.sqlite3"
+      "targetType": "wappler"
     },
     {
       "name": "Producao",
-      "remoteURL": "https://sgi.rubensbentes.com.br",
+      "remoteURL": "https://sgi.rubensbentes.com.br:3000",
       "access": "ftp",
       "targetType": "wappler",
       "usage": "production",
       "ftpServer": "ftp.rubensbentes.com.br",
       "ftpUser": "master@sgi.rubensbentes.com.br",
-      "ftpPassword": "v2:4044bae431edab857028afb8322c10fa0d49b66c34928c25"
+      "ftpPassword": "v2:55ffb87eb1f815022669dc21e7ded5012faaac04dc198f23",
+      "databaseConnectionType": "custom",
+      "databaseType": "postgres",
+      "db_host": "aws-0-sa-east-1.pooler.supabase.com",
+      "db_port": "5432",
+      "db_user": "postgres.eqyafrpnfuwgessstuzc",
+      "db_password": "@Baki025@",
+      "db_database": "postgres"
     }
   ],
   "activeTarget": "Development",
