@@ -36,203 +36,6 @@
           "schema": "realtime"
         }
       },
-      "colaboradores": {
-        "db": {
-          "schema": "public"
-        },
-        "columns": {
-          "id_colaborador": {
-            "db": {
-              "type": "uuid",
-              "default": "gen_random_uuid()",
-              "primary": true,
-              "unique": true,
-              "nullable": false
-            }
-          },
-          "created_at_colaborador": {
-            "db": {
-              "type": "timestamp",
-              "default": "now()",
-              "useTz": true,
-              "primary": false,
-              "unique": false,
-              "nullable": false
-            }
-          },
-          "nome_colaborador": {
-            "db": {
-              "type": "string",
-              "maxLength": -5,
-              "primary": false,
-              "unique": false,
-              "nullable": true
-            }
-          },
-          "cpf_colaborador": {
-            "db": {
-              "type": "string",
-              "maxLength": -5,
-              "primary": false,
-              "unique": false,
-              "nullable": true
-            }
-          },
-          "base64": {
-            "db": {
-              "type": "text",
-              "primary": false,
-              "unique": false,
-              "nullable": true
-            }
-          }
-        },
-        "refs": {
-          "veiculos_colaboradores": "colaborador",
-          "registro_portaria": "id_agente_portaria"
-        }
-      },
-      "veiculos_colaboradores": {
-        "db": {
-          "schema": "public"
-        },
-        "columns": {
-          "id_veiculo_colaborador": {
-            "db": {
-              "type": "bigIncrements",
-              "primary": true,
-              "unique": true,
-              "nullable": false
-            }
-          },
-          "created_at": {
-            "db": {
-              "type": "timestamp",
-              "default": "now()",
-              "useTz": true,
-              "primary": false,
-              "unique": false,
-              "nullable": false
-            }
-          },
-          "tipo_veiculo": {
-            "db": {
-              "type": "string",
-              "maxLength": -5,
-              "primary": false,
-              "unique": false,
-              "nullable": true
-            }
-          },
-          "placa_veiculo": {
-            "db": {
-              "type": "string",
-              "maxLength": -5,
-              "primary": false,
-              "unique": false,
-              "nullable": true
-            }
-          },
-          "colaborador": {
-            "db": {
-              "type": "reference",
-              "primary": false,
-              "unique": false,
-              "nullable": true,
-              "references": "id_colaborador",
-              "inTable": "colaboradores",
-              "referenceType": "uuid",
-              "onUpdate": "NO ACTION",
-              "onDelete": "NO ACTION"
-            }
-          }
-        },
-        "refs": {
-          "registro_portaria": "id_veiculo_registrado"
-        }
-      },
-      "registro_portaria": {
-        "db": {
-          "schema": "public"
-        },
-        "columns": {
-          "id_registro_portaria": {
-            "db": {
-              "type": "bigIncrements",
-              "primary": true,
-              "unique": true,
-              "nullable": false
-            }
-          },
-          "created_at_registro_portaria": {
-            "db": {
-              "type": "timestamp",
-              "default": "now()",
-              "useTz": true,
-              "primary": false,
-              "unique": false,
-              "nullable": false
-            }
-          },
-          "id_colaborador_registro": {
-            "db": {
-              "type": "reference",
-              "primary": false,
-              "unique": false,
-              "nullable": true,
-              "references": "id_colaborador",
-              "inTable": "colaboradores",
-              "referenceType": "uuid",
-              "onUpdate": "NO ACTION",
-              "onDelete": "NO ACTION"
-            }
-          },
-          "tipo_registro": {
-            "db": {
-              "type": "string",
-              "maxLength": -5,
-              "primary": false,
-              "unique": false,
-              "nullable": true
-            }
-          },
-          "data_hora": {
-            "db": {
-              "type": "timestamp",
-              "useTz": true,
-              "primary": false,
-              "unique": false,
-              "nullable": true
-            }
-          },
-          "id_agente_portaria": {
-            "db": {
-              "type": "reference",
-              "primary": false,
-              "unique": false,
-              "nullable": true,
-              "references": "id_colaborador",
-              "inTable": "colaboradores",
-              "referenceType": "uuid",
-              "onUpdate": "NO ACTION",
-              "onDelete": "NO ACTION"
-            }
-          },
-          "id_veiculo_registrado": {
-            "db": {
-              "type": "reference",
-              "primary": false,
-              "unique": false,
-              "nullable": true,
-              "references": "id_veiculo_colaborador",
-              "inTable": "veiculos_colaboradores",
-              "referenceType": "bigInteger",
-              "onUpdate": "NO ACTION",
-              "onDelete": "NO ACTION"
-            }
-          }
-        }
-      },
       "vault.secrets": {
         "db": {
           "schema": "vault",
@@ -703,6 +506,265 @@
         },
         "refs": {
           "auth.mfa_challenges": "factor_id"
+        }
+      },
+      "colaboradores": {
+        "db": {
+          "schema": "public"
+        },
+        "columns": {
+          "id_colaborador": {
+            "db": {
+              "type": "uuid",
+              "default": "gen_random_uuid()",
+              "primary": true,
+              "unique": true,
+              "nullable": false
+            }
+          },
+          "created_at_colaborador": {
+            "db": {
+              "type": "timestamp",
+              "default": "now()",
+              "useTz": true,
+              "primary": false,
+              "unique": false,
+              "nullable": false
+            }
+          },
+          "nome_colaborador": {
+            "db": {
+              "type": "string",
+              "maxLength": -5,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "cpf_colaborador": {
+            "db": {
+              "type": "string",
+              "maxLength": -5,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "base64": {
+            "db": {
+              "type": "text",
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "data_nascimento": {
+            "db": {
+              "type": "date",
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "email": {
+            "db": {
+              "type": "string",
+              "maxLength": -5,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "telefone": {
+            "db": {
+              "type": "string",
+              "maxLength": -5,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "password": {
+            "db": {
+              "type": "string",
+              "maxLength": -5,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          }
+        },
+        "refs": {
+          "veiculos_colaboradores": "colaborador",
+          "registro_portaria": "id_agente_portaria"
+        }
+      },
+      "veiculos_colaboradores": {
+        "db": {
+          "schema": "public"
+        },
+        "columns": {
+          "id_veiculo_colaborador": {
+            "db": {
+              "type": "bigIncrements",
+              "primary": true,
+              "unique": true,
+              "nullable": false
+            }
+          },
+          "created_at_veiculo": {
+            "db": {
+              "type": "timestamp",
+              "default": "now()",
+              "useTz": true,
+              "primary": false,
+              "unique": false,
+              "nullable": false
+            }
+          },
+          "tipo_veiculo": {
+            "db": {
+              "type": "string",
+              "maxLength": -5,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "placa_veiculo": {
+            "db": {
+              "type": "string",
+              "maxLength": -5,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "colaborador": {
+            "db": {
+              "type": "reference",
+              "primary": false,
+              "unique": false,
+              "nullable": true,
+              "references": "id_colaborador",
+              "inTable": "colaboradores",
+              "referenceType": "uuid",
+              "onUpdate": "NO ACTION",
+              "onDelete": "NO ACTION"
+            }
+          },
+          "modelo_veiculo": {
+            "db": {
+              "type": "string",
+              "maxLength": -5,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "ano_veiculo": {
+            "db": {
+              "type": "string",
+              "maxLength": -5,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "cor_veiculo": {
+            "db": {
+              "type": "string",
+              "maxLength": -5,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          }
+        },
+        "refs": {
+          "registro_portaria": "id_veiculo_registrado"
+        }
+      },
+      "registro_portaria": {
+        "db": {
+          "schema": "public"
+        },
+        "columns": {
+          "id_registro_portaria": {
+            "db": {
+              "type": "bigIncrements",
+              "primary": true,
+              "unique": true,
+              "nullable": false
+            }
+          },
+          "created_at_registro_portaria": {
+            "db": {
+              "type": "timestamp",
+              "default": "now()",
+              "useTz": true,
+              "primary": false,
+              "unique": false,
+              "nullable": false
+            }
+          },
+          "id_colaborador_registro": {
+            "db": {
+              "type": "reference",
+              "primary": false,
+              "unique": false,
+              "nullable": true,
+              "references": "id_colaborador",
+              "inTable": "colaboradores",
+              "referenceType": "uuid",
+              "onUpdate": "NO ACTION",
+              "onDelete": "NO ACTION"
+            }
+          },
+          "tipo_registro": {
+            "db": {
+              "type": "string",
+              "maxLength": -5,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "data_hora": {
+            "db": {
+              "type": "timestamp",
+              "useTz": true,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "id_agente_portaria": {
+            "db": {
+              "type": "reference",
+              "primary": false,
+              "unique": false,
+              "nullable": true,
+              "references": "id_colaborador",
+              "inTable": "colaboradores",
+              "referenceType": "uuid",
+              "onUpdate": "NO ACTION",
+              "onDelete": "NO ACTION"
+            }
+          },
+          "id_veiculo_registrado": {
+            "db": {
+              "type": "reference",
+              "primary": false,
+              "unique": false,
+              "nullable": true,
+              "references": "id_veiculo_colaborador",
+              "inTable": "veiculos_colaboradores",
+              "referenceType": "bigInteger",
+              "onUpdate": "NO ACTION",
+              "onDelete": "NO ACTION"
+            }
+          }
         }
       }
     },

@@ -1,0 +1,131 @@
+{
+  "meta": {
+    "$_GET": [
+      {
+        "type": "text",
+        "name": "sort"
+      },
+      {
+        "type": "text",
+        "name": "dir"
+      }
+    ]
+  },
+  "exec": {
+    "steps": {
+      "name": "query_listagem_registros",
+      "module": "dbconnector",
+      "action": "select",
+      "options": {
+        "connection": "rodrigues",
+        "sql": {
+          "type": "SELECT",
+          "columns": [
+            {
+              "table": "colaboradores",
+              "column": "nome_colaborador"
+            },
+            {
+              "table": "colaboradores",
+              "column": "cpf_colaborador"
+            },
+            {
+              "table": "veiculos_colaboradores",
+              "column": "modelo_veiculo"
+            },
+            {
+              "table": "veiculos_colaboradores",
+              "column": "cor_veiculo"
+            },
+            {
+              "table": "veiculos_colaboradores",
+              "column": "placa_veiculo"
+            },
+            {
+              "table": "registro_portaria",
+              "column": "tipo_registro"
+            }
+          ],
+          "params": [],
+          "table": {
+            "name": "registro_portaria"
+          },
+          "primary": "id_registro_portaria",
+          "joins": [
+            {
+              "table": "colaboradores",
+              "column": "*",
+              "type": "INNER",
+              "clauses": {
+                "condition": "AND",
+                "rules": [
+                  {
+                    "table": "colaboradores",
+                    "column": "id_colaborador",
+                    "operator": "equal",
+                    "operation": "=",
+                    "value": {
+                      "table": "registro_portaria",
+                      "column": "id_colaborador_registro"
+                    }
+                  }
+                ]
+              },
+              "primary": "id_colaborador"
+            },
+            {
+              "table": "veiculos_colaboradores",
+              "column": "*",
+              "type": "INNER",
+              "clauses": {
+                "condition": "AND",
+                "rules": [
+                  {
+                    "table": "veiculos_colaboradores",
+                    "column": "id_veiculo_colaborador",
+                    "operator": "equal",
+                    "operation": "=",
+                    "value": {
+                      "table": "registro_portaria",
+                      "column": "id_veiculo_registrado"
+                    }
+                  }
+                ]
+              },
+              "primary": "id_veiculo_colaborador"
+            }
+          ],
+          "query": "select \"colaboradores\".\"nome_colaborador\", \"colaboradores\".\"cpf_colaborador\", \"veiculos_colaboradores\".\"modelo_veiculo\", \"veiculos_colaboradores\".\"cor_veiculo\", \"veiculos_colaboradores\".\"placa_veiculo\", \"registro_portaria\".\"tipo_registro\" from \"registro_portaria\" inner join \"colaboradores\" on \"colaboradores\".\"id_colaborador\" = \"registro_portaria\".\"id_colaborador_registro\" inner join \"veiculos_colaboradores\" on \"veiculos_colaboradores\".\"id_veiculo_colaborador\" = \"registro_portaria\".\"id_veiculo_registrado\""
+        }
+      },
+      "output": true,
+      "meta": [
+        {
+          "type": "text",
+          "name": "nome_colaborador"
+        },
+        {
+          "type": "text",
+          "name": "cpf_colaborador"
+        },
+        {
+          "type": "text",
+          "name": "modelo_veiculo"
+        },
+        {
+          "type": "text",
+          "name": "cor_veiculo"
+        },
+        {
+          "type": "text",
+          "name": "placa_veiculo"
+        },
+        {
+          "type": "text",
+          "name": "tipo_registro"
+        }
+      ],
+      "outputType": "array"
+    }
+  }
+}

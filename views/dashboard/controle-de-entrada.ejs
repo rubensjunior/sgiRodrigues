@@ -1,0 +1,32 @@
+<!-- Wappler include head-page="layouts/backoffice" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="controledeentrada" appConnect="local" components="{dmxBootstrap5TableGenerator:{},dmxPreloader:{}}" -->
+<dmx-preloader id="preloader1" color="#0026ff" spinner="chasingDots"></dmx-preloader>
+<dmx-serverconnect id="listagem_registro" url="/api/portaria/listar-registros"></dmx-serverconnect>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th class="pb-3">COLABORADOR</th>
+                        <th class="pb-3">CPF</th>
+                        <th class="pb-3">VEÍCULO</th>
+                        <th class="pb-3">COR DO VEÍCULO</th>
+                        <th class="pb-3">PLACA</th>
+                        <th class="pb-3">REGISTRO</th>
+                    </tr>
+                </thead>
+                <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="listagem_registro.data.query_listagem_registros" id="tableRepeat1">
+                    <tr>
+                        <td dmx-text="nome_colaborador" class="py-3"></td>
+                        <td dmx-text="cpf_colaborador" class="py-3"></td>
+                        <td dmx-text="modelo_veiculo" class="py-3"></td>
+                        <td dmx-text="cor_veiculo" class="py-3"></td>
+                        <td dmx-text="placa_veiculo" class="py-3"></td>
+                        <td dmx-text="tipo_registro" class="py-3"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<meta name="ac:route" content="/d/backoffice/controle-de-entrada">

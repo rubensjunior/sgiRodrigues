@@ -1,0 +1,10 @@
+{
+  "inicial.ejs": {
+    "layoutPage": "backoffice",
+    "description": ""
+  },
+  "controle-de-entrada.ejs": {
+    "layoutPage": "backoffice",
+    "description": ""
+  }
+}

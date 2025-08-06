@@ -21,6 +21,16 @@
       "path": "/portaria",
       "page": "portaria",
       "layout": "main"
+    },
+    {
+      "path": "/d/backoffice/",
+      "page": "dashboard/inicial",
+      "layout": "backoffice"
+    },
+    {
+      "path": "/d/backoffice/controle-de-entrada",
+      "page": "dashboard/controle-de-entrada",
+      "layout": "backoffice"
     }
   ]
 }
